@@ -76,7 +76,7 @@ pjax.checkVisibility = function (tab) {
 
     if (!tab) { return; }
 
-    var panelNode = tab.get('panelNode'),
+    var panelNode = tab.get(),
         visibleItems;
 
     // If no items are visible in the tab panel due to the current visibility
@@ -154,7 +154,7 @@ pjax.initClassTabView = function () {
 
 pjax.initLineNumbers = function () {
     var hash      = win.location.hash.substring(1),
-        container = pjax.get('container'),
+        container = pjax.get(),
         hasLines, node;
 
     // Add ids for each line number in the file source view.
@@ -233,8 +233,8 @@ pjax.updateTabState = function (src) {
 
     if (hash && (node = Y.one('#classdocs').getById(hash))) {
         if ((tabPanel = node.ancestor('.api-class-tabpanel', true))) {
-            if ((tab = Y.one('#classdocs .api-class-tab.' + tabPanel.get('id')))) {
-                if (classTabView.get('rendered')) {
+            if ((tab = Y.one('#classdocs .api-class-tab.' + tabPanel.get()))) {
+                if (classTabView.get()) {
                     Y.Widget.getByNode(tab).set('selected', 1);
                 } else {
                     tab.addClass('yui3-tab-selected');
@@ -244,7 +244,7 @@ pjax.updateTabState = function (src) {
 
         // Scroll to the desired element if this is a hash URL.
         if (node) {
-            if (classTabView.get('rendered')) {
+            if (classTabView.get()) {
                 scrollToNode();
             } else {
                 classTabView.once('renderedChange', scrollToNode);
@@ -258,7 +258,7 @@ pjax.updateTabState = function (src) {
             tab = Y.one('#classdocs .api-class-tab.index');
         }
 
-        if (classTabView.get('rendered')) {
+        if (classTabView.get()) {
             Y.Widget.getByNode(tab).set('selected', 1);
         } else {
             tab.addClass('yui3-tab-selected');
@@ -267,19 +267,19 @@ pjax.updateTabState = function (src) {
 };
 
 pjax.updateVisibility = function () {
-    var container = pjax.get('container');
+    var container = pjax.get();
 
     container.toggleClass('hide-inherited',
-            !Y.one('#api-show-inherited').get('checked'));
+            !Y.one('#api-show-inherited').get());
 
     container.toggleClass('show-deprecated',
-            Y.one('#api-show-deprecated').get('checked'));
+            Y.one('#api-show-deprecated').get());
 
     container.toggleClass('show-protected',
-            Y.one('#api-show-protected').get('checked'));
+            Y.one('#api-show-protected').get());
 
     container.toggleClass('show-private',
-            Y.one('#api-show-private').get('checked'));
+            Y.one('#api-show-private').get());
 
     pjax.checkVisibility();
 };
@@ -340,7 +340,7 @@ pjax.onOptionClick = function (e) {
 
 pjax.onTabSelectionChange = function (e) {
     var tab   = e.newVal,
-        tabId = tab.get('contentBox').getAttribute('href').substring(1);
+        tabId = tab.get().getAttribute('href').substring(1);
 
     selectedTab = tab;
 
@@ -365,7 +365,7 @@ pjax.initClassTabView();
 pjax.initLineNumbers();
 pjax.updateVisibility();
 
-Y.APIList.rootPath = pjax.get('root');
+Y.APIList.rootPath = pjax.get();
 
 Y.one('#api-options').delegate('click', pjax.onOptionClick, 'input');
 

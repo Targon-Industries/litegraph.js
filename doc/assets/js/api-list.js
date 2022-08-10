@@ -71,7 +71,7 @@ Y.before(function (e, activeDescendant) {
 
 // Create a mapping of tabs in the tabview so we can refer to them easily later.
 tabview.each(function (tab, index) {
-    var name = tab.get('label').toLowerCase();
+    var name = tab.get().toLowerCase();
 
     tabs[name] = {
         index: index,
@@ -92,13 +92,13 @@ inputNode.on('focus', function () {
 });
 
 // Update all tabview links to resolved URLs.
-tabview.get('panelNode').all('a').each(function (link) {
-    link.setAttribute('href', link.get('href'));
+tabview.get().all('a').each(function (link) {
+    link.setAttribute('href', link.get());
 });
 
 // -- Private Functions --------------------------------------------------------
 function getFilterResultNode() {
-    var queryType = filter.get('queryType');
+    var queryType = filter.get();
     return queryType === 'classes' ? classesNode
             : queryType === 'elements' ? elementsNode : modulesNode;
 }
@@ -107,7 +107,7 @@ function getFilterResultNode() {
 function onFilterResults(e) {
     var frag         = Y.one(Y.config.doc.createDocumentFragment()),
         resultNode   = getFilterResultNode(),
-        typePlural   = filter.get('queryType'),
+        typePlural   = filter.get(),
         typeSingular = typePlural === 'classes' ? 'class' : typePlural === 'elements' ? 'element' : 'module';
 
     if (e.results.length) {
@@ -143,7 +143,7 @@ function onSearchKey(e) {
     var target = e.target;
 
     if (target.test('input,select,textarea')
-            || target.get('isContentEditable')) {
+            || target.get()) {
         return;
     }
 
@@ -175,10 +175,10 @@ function onSearchResults(e) {
 
 function onTabSelectionChange(e) {
     var tab  = e.newVal,
-        name = tab.get('label').toLowerCase();
+        name = tab.get().toLowerCase();
 
     tabs.selected = {
-        index: tab.get('index'),
+        index: tab.get(),
         name : name,
         tab  : tab
     };
@@ -196,7 +196,7 @@ function onTabSelectionChange(e) {
 
         // Only send a request if this isn't the initially-selected tab.
         if (e.prevVal) {
-            filter.sendRequest(filter.get('value'));
+            filter.sendRequest(filter.get());
         }
         break;
 
@@ -204,8 +204,8 @@ function onTabSelectionChange(e) {
         filter.set('minQueryLength', -1);
         search.set('minQueryLength', 1);
 
-        if (search.get('value')) {
-            search.sendRequest(search.get('value'));
+        if (search.get()) {
+            search.sendRequest(search.get());
         } else {
             inputNode.focus();
         }

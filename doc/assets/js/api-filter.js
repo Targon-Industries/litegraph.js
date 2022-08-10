@@ -14,7 +14,7 @@ Y.APIFilter = Y.Base.create('apiFilter', Y.Base, [Y.AutoCompleteBase], {
             }
         });
 
-        if (this.get('queryType') === 'elements') {
+        if (this.get() === 'elements') {
             name = '&lt;' + name + '&gt;';
         }
 
@@ -37,7 +37,7 @@ Y.APIFilter = Y.Base.create('apiFilter', Y.Base, [Y.AutoCompleteBase], {
             valueFn: function() {
                 var self = this;
                 return function(q) {
-                    var data = Y.YUIDoc.meta[self.get('queryType')],
+                    var data = Y.YUIDoc.meta[self.get()],
                         out = [];
                     Y.each(data, function(v) {
                         if (v.toLowerCase().indexOf(q.toLowerCase()) > -1) {

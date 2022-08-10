@@ -408,7 +408,7 @@
     };
 
     MIDIInterface.prototype.openInputPort = function(port, callback) {
-        var input_port = this.input_ports.get("input-" + port);
+        var input_port = this.input_ports.get();
         if (!input_port) {
             return false;
         }
