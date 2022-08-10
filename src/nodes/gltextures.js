@@ -4730,7 +4730,7 @@ void main(void){\n\
 	LGraphTextureCurve.prototype.onMouseUp = function(e, localpos, graphcanvas)
 	{
 		if(this.curve_editor)
-			return this.curve_editor.onMouseUp([localpos[0],localpos[1]-this.curve_offset]);
+			return this.curve_editor.onMouseUp([localpos[0],localpos[1]-this.curve_offset], graphcanvas);
 		this.captureInput(false);
 	}
 
