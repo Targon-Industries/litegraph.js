@@ -666,6 +666,8 @@ export declare class LGraphNode {
     toString(): string;
     /** get the title string */
     getTitle(): string;
+    /** sets the value of a property */
+    setProperty(name: string, value: any): void;
     /** sets the output data */
     setOutputData(slot: number, data: any): void;
     /** sets the output data */
@@ -1140,6 +1142,8 @@ export declare class LGraphCanvas {
     allow_interaction: boolean;
     /** allows to change a connection with having to redo it again */
     allow_reconnect_links: boolean;
+    /** allow selecting multi nodes without pressing extra keys */
+    multi_select: boolean;
     /** No effect */
     allow_searchbox: boolean;
     always_render_background: boolean;
